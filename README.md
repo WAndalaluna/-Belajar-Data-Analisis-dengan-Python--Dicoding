@@ -5,9 +5,9 @@ Proyek: Analisis Data E-Commerce
 Repository ini berisi proyek analisis data yang berfokus pada E-Commerce Public Dataset. Tujuan proyek ini adalah untuk menghasilkan wawasan dan informasi yang bermanfaat dari data yang dianalisis, dengan hasil yang divisualisasikan melalui dashboard yang dideploy menggunakan Streamlit.
 
 # Struktur Direktori
-/data: Direktori ini berisi dataset yang digunakan dalam proyek dalam format .csv.gz.
-- all_data.csv.gz
-- geolocation.csv.gz
+/data: Direktori ini berisi dataset yang digunakan dalam proyek dalam format .csv
+- all_data.csv
+- geolocation.csv
 
 /dashboard: Berisi file Python utama yang digunakan untuk membangun dan mendepoy dashboard hasil analisis data.
 - dashboard.py: Script utama untuk menjalankan dashboard Streamlit.
