@@ -7,10 +7,8 @@ from babel.numbers import format_currency
 import streamlit as st
 from func import DataAnalyzer, BrazilMapPlotter
 
-# Set up visualization styles
 sns.set(style='whitegrid')
 
-# Custom CSS for sidebar styling
 st.markdown("""
     <style>
         .sidebar .sidebar-content {
@@ -25,15 +23,12 @@ st.markdown("""
     </style>
     """, unsafe_allow_html=True)
 
-# Sidebar Title and Description
 st.sidebar.markdown("<h1 style='font-size:25px;'>E-Commerce Insights</h1>", unsafe_allow_html=True)
 st.sidebar.markdown("Explore sales, customer data, and product trends with detailed visualizations.", unsafe_allow_html=True)
 
-# Load datasets
 all_data = pd.read_csv("https://raw.githubusercontent.com/WAndalaluna/-Belajar-Data-Analisis-dengan-Python--Dicoding/refs/heads/main/data/all_data.csv")
 geolocation = pd.read_csv('https://raw.githubusercontent.com/WAndalaluna/-Belajar-Data-Analisis-dengan-Python--Dicoding/refs/heads/main/data/geolocation.csv')
 
-# Preprocess data
 datetime_cols = ["order_approved_at", "order_delivered_carrier_date", 
                  "order_delivered_customer_date", "order_estimated_delivery_date", 
                  "order_purchase_timestamp", "shipping_limit_date"]
@@ -45,7 +40,6 @@ for col in datetime_cols:
 all_data.sort_values(by="order_approved_at", inplace=True)
 all_data.reset_index(drop=True, inplace=True)
 
-# Sidebar: Date Range Selection with Emoji and Separator
 st.sidebar.markdown("## 📅 Select Date Range")
 min_date = all_data["order_approved_at"].min()
 max_date = all_data["order_approved_at"].max()
@@ -56,31 +50,27 @@ start_date, end_date = st.sidebar.date_input("Choose Date Range",
 
 st.sidebar.markdown("---")  # Add a separator
 
-# Sidebar: Filtering Options with a Selectbox for Orders Status
 st.sidebar.markdown("## 🛍️ Filter by Order Status")
 order_status_options = all_data['order_status'].unique()
 selected_status = st.sidebar.selectbox("Select Order Status", options=order_status_options)
 
-# Filter data based on date and order status selection
 main_df = all_data[(all_data["order_approved_at"] >= str(start_date)) & 
                  (all_data["order_approved_at"] <= str(end_date)) & 
                  (all_data["order_status"] == selected_status)]
 
 st.sidebar.markdown("---")
 
-# Sidebar: Display summary statistics (Optional)
+# Sidebar
 st.sidebar.markdown("## 📊 Data Summary")
 total_orders = len(main_df)
 total_revenue = main_df['payment_value'].sum()
 st.sidebar.metric("Total Orders", total_orders)
 st.sidebar.metric("Total Revenue", format_currency(total_revenue, "IDR", locale="id_ID"))
 
-# Initialize analysis classes
 function = DataAnalyzer(main_df)
 map_plot = BrazilMapPlotter(geolocation.drop_duplicates(subset='customer_unique_id'), 
                              plt, mpimg, urllib, st)
 
-# Generate data summaries
 daily_orders_df = function.create_daily_orders_df()
 sum_spend_df = function.create_sum_spend_df()
 sum_order_items_df = function.create_sum_order_items_df()
@@ -88,7 +78,6 @@ review_score, common_score = function.review_score_df()
 state, most_common_state = function.create_bystate_df()
 order_status, common_status = function.create_order_status()
 
-# Dashboard Title
 st.markdown("<h1 class='big-font'>E-Commerce Dashboard</h1>", unsafe_allow_html=True)
 
 # Question 1: Top 5 Products Sold
