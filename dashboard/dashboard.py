@@ -9,7 +9,6 @@ from func import DataAnalyzer, BrazilMapPlotter
 
 # Set up visualization styles
 sns.set(style='whitegrid')
-st.set_option('deprecation.showPyplotGlobalUse', False)
 
 # Custom CSS for sidebar styling
 st.markdown("""
@@ -64,7 +63,7 @@ selected_status = st.sidebar.selectbox("Select Order Status", options=order_stat
 
 # Filter data based on date and order status selection
 main_df = all_data[(all_data["order_approved_at"] >= str(start_date)) & 
-                 (all_data["order_approved_at"] <= str(end_date)) &
+                 (all_data["order_approved_at"] <= str(end_date)) & 
                  (all_data["order_status"] == selected_status)]
 
 st.sidebar.markdown("---")
@@ -98,14 +97,14 @@ sum_order_items_df = all_data.groupby("product_category_name_english")["product_
 sum_order_items_df = sum_order_items_df.rename(columns={"product_id": "products"})
 sum_order_items_df = sum_order_items_df.sort_values(by="products", ascending=False).head(5)
 
-plt.figure(figsize=(12, 6))
+# Plot Top 5 Products Sold
+fig, ax = plt.subplots(figsize=(12, 6))
 colors = sns.color_palette("viridis", n_colors=5)
-sns.barplot(x="products", y="product_category_name_english", data=sum_order_items_df, palette=colors)
-plt.xlabel("Number of Products Sold", fontsize=14)
-plt.ylabel("Product Category", fontsize=14)
-plt.title("Top 5 Products Sold", loc="center", fontsize=18)
-plt.tick_params(axis='y', labelsize=12)
-st.pyplot()
+sns.barplot(x="products", y="product_category_name_english", data=sum_order_items_df, palette=colors, ax=ax)
+ax.set_xlabel("Number of Products Sold", fontsize=14)
+ax.set_ylabel("Product Category", fontsize=14)
+ax.set_title("Top 5 Products Sold", loc="center", fontsize=18)
+st.pyplot(fig)
 
 # Question 2: Monthly Orders
 st.markdown("<h2 class='header-font'>Monthly Orders</h2>", unsafe_allow_html=True)
@@ -118,14 +117,13 @@ if 'order_approved_at' in all_data.columns:
     monthly_df["month_numeric"] = monthly_df["order_approved_at"].map(month_mapping)
     monthly_df = monthly_df.sort_values("month_numeric").drop("month_numeric", axis=1)
 
-    plt.figure(figsize=(10, 5))
-    sns.barplot(x=monthly_df["order_approved_at"], y=monthly_df["order_count"], color="#068DA9")
-    plt.title("Number of Orders per Month (2018)", loc="center", fontsize=20)
-    plt.xticks(fontsize=10, rotation=25)
-    plt.yticks(fontsize=10)
-    plt.xlabel("Month", fontsize=12)
-    plt.ylabel("Number of Orders", fontsize=12)
-    st.pyplot()
+    # Plot Monthly Orders
+    fig, ax = plt.subplots(figsize=(10, 5))
+    sns.barplot(x=monthly_df["order_approved_at"], y=monthly_df["order_count"], color="#068DA9", ax=ax)
+    ax.set_title("Number of Orders per Month (2018)", loc="center", fontsize=20)
+    ax.set_xlabel("Month", fontsize=12)
+    ax.set_ylabel("Number of Orders", fontsize=12)
+    st.pyplot(fig)
 else:
     st.write("'order_approved_at' does not exist in the DataFrame.")
 
@@ -142,36 +140,36 @@ days_order = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'
 daily_sales['day_of_week'] = pd.Categorical(daily_sales['day_of_week'], categories=days_order, ordered=True)
 daily_sales = daily_sales.sort_values('day_of_week')
 
-plt.figure(figsize=(10, 5))
-sns.barplot(x='day_of_week', y='total_orders', data=daily_sales, palette='viridis')
-plt.title('Total Orders by Day of the Week', fontsize=20)
-plt.xlabel('Day of the Week', fontsize=14)
-plt.ylabel('Total Orders', fontsize=14)
-plt.xticks(rotation=45)
-st.pyplot()
+# Plot Orders by Day
+fig, ax = plt.subplots(figsize=(10, 5))
+sns.barplot(x='day_of_week', y='total_orders', data=daily_sales, palette='viridis', ax=ax)
+ax.set_title('Total Orders by Day of the Week', fontsize=20)
+ax.set_xlabel('Day of the Week', fontsize=14)
+ax.set_ylabel('Total Orders', fontsize=14)
+st.pyplot(fig)
 
-plt.figure(figsize=(10, 5))
-sns.barplot(x='hour_of_day', y='total_orders', data=hourly_sales, palette='viridis')
-plt.title('Total Orders by Hour of the Day', fontsize=20)
-plt.xlabel('Hour of the Day', fontsize=14)
-plt.ylabel('Total Orders', fontsize=14)
-plt.xticks(rotation=45)
-st.pyplot()
+# Plot Orders by Hour
+fig, ax = plt.subplots(figsize=(10, 5))
+sns.barplot(x='hour_of_day', y='total_orders', data=hourly_sales, palette='viridis', ax=ax)
+ax.set_title('Total Orders by Hour of the Day', fontsize=20)
+ax.set_xlabel('Hour of the Day', fontsize=14)
+ax.set_ylabel('Total Orders', fontsize=14)
+st.pyplot(fig)
 
 # Question 4: Geographical Distribution of Customers
 st.markdown("<h2 class='header-font'>Geographical Distribution of Customers</h2>", unsafe_allow_html=True)
 def plot_brazil_map(data):
     brazil = mpimg.imread(urllib.request.urlopen('https://i.pinimg.com/originals/3a/0c/e1/3a0ce18b3c842748c255bc0aa445ad41.jpg'),'jpg')
-    plt.figure(figsize=(10, 10))
+    fig, ax = plt.subplots(figsize=(10, 10))
     extent = [-73.98283055, -33.8, -33.75116944, 5.4]
     heatmap_data = data[['geolocation_lat', 'geolocation_lng']]
-    ax = plt.gca()
     sns.kdeplot(data=heatmap_data, x='geolocation_lng', y='geolocation_lat', fill=True, cmap='Reds', alpha=0.5, thresh=0, ax=ax)
-    plt.imshow(brazil, extent=extent, aspect='auto')
-    plt.xlim(extent[0], extent[1])
-    plt.ylim(extent[2], extent[3])
-    plt.axis('off')
-    plt.show()
+    ax.imshow(brazil, extent=extent, aspect='auto')
+    ax.set_xlim(extent[0], extent[1])
+    ax.set_ylim(extent[2], extent[3])
+    ax.axis('off')
 
-plot_brazil_map(geolocation.drop_duplicates(subset='customer_unique_id'))
-st.pyplot()
+    return fig
+
+fig = plot_brazil_map(geolocation.drop_duplicates(subset='customer_unique_id'))
+st.pyplot(fig)
