@@ -19,27 +19,24 @@ notebook.ipynb: File Jupyter Notebook yang digunakan untuk proses analisis data.
 # Instalasi
 Ikuti langkah-langkah berikut untuk mengatur dan menjalankan proyek ini secara lokal:
 
-Clone repository ke komputer lokal Anda:
-
-bash
+1. Clone repository:
+   
 Copy code
 git clone https://github.com/WAndalaluna/-Belajar-Data-Analisis-dengan-Python--Dicoding.git
 
-Instal pustaka Python yang dibutuhkan:
-
-bash
+2. Pastikan memiliki lingkungan Python yang sesuai dan pustaka yang diperlukan.
 Copy code
 pip install streamlit
 pip install -r requirements.txt
-Penggunaan
-Masuk ke direktori proyek:
 
-bash
-Copy code
-cd dicoding/dashboard/
+Penggunaan
+
+1.Masuk ke direktori proyek:
+
+1. Copy code
+cd -Belajar-Data-Analisis-dengan-Python--Dicoding/dashboard/
 Jalankan aplikasi Streamlit:
 
-bash
 Copy code
 streamlit run dashboard.py
-Ini akan memulai server Streamlit dan membuka dashboard di browser web Anda.
+memulai server streamlit di dashboard anda
