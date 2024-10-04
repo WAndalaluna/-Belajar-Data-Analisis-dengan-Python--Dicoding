@@ -30,8 +30,8 @@ st.sidebar.markdown("<h1 style='font-size:25px;'>E-Commerce Insights</h1>", unsa
 st.sidebar.markdown("Explore sales, customer data, and product trends with detailed visualizations.", unsafe_allow_html=True)
 
 # Load datasets
-all_data = pd.read_csv("../data/all_data.csv.gz")
-geolocation = pd.read_csv('../data/geolocation.csv.gz')
+all_data = pd.read_csv("https://raw.githubusercontent.com/WAndalaluna/-Belajar-Data-Analisis-dengan-Python--Dicoding/refs/heads/main/data/all_data.csv")
+geolocation = pd.read_csv('https://raw.githubusercontent.com/WAndalaluna/-Belajar-Data-Analisis-dengan-Python--Dicoding/refs/heads/main/data/geolocation.csv')
 
 # Preprocess data
 datetime_cols = ["order_approved_at", "order_delivered_carrier_date", 
