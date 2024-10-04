@@ -24,8 +24,8 @@ Ikuti langkah-langkah berikut untuk mengatur dan menjalankan proyek ini secara l
 git clone https://github.com/WAndalaluna/-Belajar-Data-Analisis-dengan-Python--Dicoding.git
 
 2. Pastikan memiliki lingkungan Python yang sesuai dan pustaka yang diperlukan.
-pip install streamlit
-pip install -r requirements.txt
+- pip install streamlit
+- pip install -r requirements.txt
 
 Penggunaan
 
