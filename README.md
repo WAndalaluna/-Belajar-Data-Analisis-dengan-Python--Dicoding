@@ -36,7 +36,7 @@ Tujuan proyek ini adalah untuk menghasilkan wawasan dan informasi yang bermanfaa
 1. Masuk ke direktori proyek (Local):
 
    ```shell
-   cd -Belajar-Data-Analisis-dengan-Python--Dicoding/dashboar
+   cd -Belajar-Data-Analisis-dengan-Python--Dicoding/dashboard
    streamlit run dashboard.py
    ```
 
