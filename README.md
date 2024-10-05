@@ -10,10 +10,10 @@ Tujuan proyek ini adalah untuk menghasilkan wawasan dan informasi yang bermanfaa
 
 ## Struktur Direktori
 
-> dashboard/: Direktori ini berisi dashboard.py yang digunakan untuk membuat dashboard dari hasil analisis data.
-> data/:  Direktori ini berisi file csv.
-> notebook.ipynb: File yang digunakan untuk melakukan data analisis
-> README.md: File Dokumentasi
+- **dashboard/**: Direktori ini berisi `dashboard.py` yang digunakan untuk membuat dashboard dari hasil analisis data.
+- **data/**: Direktori ini berisi file CSV.
+- **notebook.ipynb**: File yang digunakan untuk melakukan analisis data.
+- **README.md**: File dokumentasi.
 
 
 ## Instalasi
