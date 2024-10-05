@@ -10,27 +10,10 @@ Tujuan proyek ini adalah untuk menghasilkan wawasan dan informasi yang bermanfaa
 
 ## Struktur Direktori
 
-├── dashboard/
-│   ├── __pycache__/
-│   ├── dashboard.py         # Script utama untuk menjalankan dashboard Streamlit.
-│   ├── func.py              # Fungsi pendukung untuk analisis dan pengolahan data.
-├── data/
-│   ├── all_data.csv           # Data gabungan semua kategori untuk analisis.
-│   ├── customers_dataset.csv  # Data pelanggan.
-│   ├── geolocation.csv        # Data lokasi geografis.
-│   ├── geolocation_dataset.csv # Data lokasi geografis yang lebih mendetail.
-│   ├── order_items_dataset.csv # Data item pesanan.
-│   ├── order_payments_dataset.csv # Data pembayaran.
-│   ├── order_reviews_dataset.csv # Data ulasan pesanan.
-│   ├── orders_dataset.csv      # Data pesanan.
-│   ├── product_category_name_translation.csv # Kategori produk.
-│   ├── products_dataset.csv     # Data produk.
-│   ├── sellers_dataset.csv      # Data penjual.
-├── LICENSE
-├── notebook.ipynb             # Jupyter Notebook untuk eksplorasi dan analisis data.
-├── README.md                  # File ini berisi panduan penggunaan proyek.
-├── requirements.txt           # Daftar pustaka yang dibutuhkan.
-├── streamlit.png              # Gambar yang mungkin digunakan di dalam aplikasi atau dokumen.
+> dashboard/: Direktori ini berisi dashboard.py yang digunakan untuk membuat dashboard dari hasil analisis data.
+> data/:  Direktori ini berisi file csv.
+> notebook.ipynb: File yang digunakan untuk melakukan data analisis
+> README.md: File Dokumentasi
 
 
 ## Instalasi
@@ -58,5 +41,3 @@ Tujuan proyek ini adalah untuk menghasilkan wawasan dan informasi yang bermanfaa
    ```
 
    Atau bisa mengunjungi website berikut [Project Data Analytics](https://dicoding-e-commerce.streamlit.app/)
-
-   <img src="./dashboard/ss.png" alt="Streamlit logo"></img>
