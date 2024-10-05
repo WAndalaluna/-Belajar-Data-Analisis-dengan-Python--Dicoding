@@ -1,8 +1,5 @@
-numpy
-pandas
-matplotlib
-seaborn
-urllib3
-pillow
-unidecode
-Babel
+Babel==2.16.0
+matplotlib==3.8.4
+pandas==2.2.3
+seaborn==0.13.2
+streamlit==1.35.0
